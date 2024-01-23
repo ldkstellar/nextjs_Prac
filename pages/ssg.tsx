@@ -3,7 +3,6 @@ import {GetStaticProps , NextPage , NextPageContext} from "next";
 // Next.js의 내장 컴퍼넌트
 import Head from "next/head";
 import { useState } from "react";
-
 // 페이지 컴퍼넌트의 props 타입 정의(여기에서는 빔)
 type SSGProps ={
     message:string
