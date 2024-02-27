@@ -4,10 +4,16 @@ import { useRouter } from "next/router";
 
 type ISRProps = {
     message:string
-};
+}
+
 const ISR:NextPage<ISRProps> = (props)=>{
     const {message} = props;
     const router = useRouter();
+    const onSubmit = ()=> {
+        router.push('/ssr');
+        router.push({pathname:'ssg',query:{keyword:'hello'}});
+    }
+
     if (router.isFallback) {
         return(
             <div>
@@ -27,6 +33,7 @@ const ISR:NextPage<ISRProps> = (props)=>{
             <main>
                 <p>이 페이지는 ISR을 통해 빌드 시 생성된 페이지입니다.</p>
                 <p>{message}</p>
+                <button onClick={onSubmit}>버튼</button>
             </main>
         </div>
     );
@@ -39,10 +46,9 @@ export const getStaticProps:GetStaticProps<ISRProps> = async (context)=>{
     return {
         props:{message,},
         // 페이지의 유효 기간을 초 단위로 지정한다.
-        revalidate:10 
-
+        revalidate:1,
     };
 
-};
+}
 
 export default ISR;
